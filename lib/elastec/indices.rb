@@ -67,15 +67,18 @@ module Elastec
 
         data.present? or raise "No index data found in #{Elastec.indices_path}"
 
-        delete_keys_if(data, 'ONLY')   { |name, only| not(name.in?(only)) }
-        delete_keys_if(data, 'EXCEPT') { |name, except| name.in?(except) }
+        filter_cli_indicies(data)
 
         data.present? or raise "Specify at least one index to work with"
       end
     end
 
-    def delete_keys_if(data, env_var, &block)
-      names = ENV[env_var]
+    def filter_cli_indicies(data)
+      delete_keys_if(data, ENV['ONLY'])   { |name, only| only.exclude?(name) }
+      delete_keys_if(data, ENV['EXCEPT']) { |name, except| except.include?(name) }
+    end
+
+    def delete_keys_if(data, names, &block)
       if names.present?
         names = names.split(',').map(&:strip)
         data.delete_if { |k, _| yield(k, names) }
