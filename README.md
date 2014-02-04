@@ -8,7 +8,6 @@ Yet another ruby adapter for elasticsearch.
 document and model instance.
 1. No extra code in models. All search and configuration logic can be stored
 outside model class (except callbacks).
-1. Query DSL. Provides powerful query builder transparent to elasticsearch api.
 1. Framework isolated. Does not care about ORM you use. Has builtin ActiveRecord
 adapter.
 1. No magic. Tries to be as much transparent to ElasticSearch api as possible.
