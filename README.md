@@ -59,9 +59,9 @@ Call:
 rake elastec:indices:update
 ```
 
-You can define your indexes in one file, or you can split it at multiple files. .yml.erb also accepted.
+You can define your indexes in one file, or you can split it to multiple files. .yml.erb also accepted.
 
-Rake task accepts ONLY and EXCEPT environment variables with index names.
+Rake task accepts ONLY and EXCEPT environment variables with comma-separated index names.
 
 ## Undone
 

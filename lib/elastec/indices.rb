@@ -61,7 +61,8 @@ module Elastec
         Dir[File.join(Elastec.indices_path, '*.yml*')].each do |path|
           yaml = File.read(path)
           yaml = ERB.new(yaml).result if File.extname(path) == '.erb'
-          data.merge!(YAML.load(yaml))
+          yaml = YAML.load(yaml)
+          data.merge!(yaml)
         end
 
         data.present? or raise "No index data found in #{Elastec.indices_path}"
